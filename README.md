@@ -16,8 +16,29 @@ A [beginner's guide](beginners-guide.md) to using the Charity Commission data ex
 This script accepts a ZIP file containing the Charity Commission data extract and converts 
 it into CSV files. It uses the bcp.py script to convert the .bcp files into .csv.
 
+#### Usage
+
+1. Download the Charity register extract ZIP file using the link above.
+2. Open the command line and navigate to the folder where you want to store the files
+3. Run the command `python /path/to/script/import.py /path/to/download/zip/RegPlusExtract_February_2015.zip`
+
+The CSV files will be created in the directory you are in.
+
+To use elsewhere use the function `import_zip(zipfile)` where zipfile is the path to the zip.
+
 ### bcp.py
 
 This script converts a .bcp file (which uses the delimiters `@**@` and `*@@*`) into a more
 standard CSV file. It can be configured to use any delimiters accepted by python's CSV
 utility.
+
+#### Usage
+
+Use the function `convert(bcpdata, csvfilename="", lineterminator='*@@*', delimiter='@**@', quote='"', newdelimiter=';')`.
+
+- `bcpdata` the full contents of the BCP file
+- `csvfilename` the path to the output file (will be "converted.csv" if left blank
+- `lineterminator` the line terminator used in the BCP file (default is `*@@*`)
+- `delimiter` the column delimiter used in the BCP file (default is `@**@`)
+- `quote` the character used to quote strings (default is `"`)
+- `newdelimiter` character used to delimit the CSV file (default is `,`)

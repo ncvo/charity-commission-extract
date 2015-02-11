@@ -2,11 +2,15 @@
 
 ## Downloading the data
 
+The data can be [downloaded from the Charity Commission website](http://data.charitycommission.gov.uk/default.aspx). The file is quite large (around 100Mb) so make take some time, particularly on slower connections).
 
+#### Data licence
+
+The data is made available by the Charity Commission under the terms of the [Open Government Licence](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).
 
 ## What the file contains
 
-The Charity Commission data extract is in the form of a ZIP file which contains 17 files, in BCP format (an SQL backup format). The included files are shown below.
+The Charity Commission data extract is in the form of a ZIP file which contains 17 files, in BCP format (an SQL backup format). The included files are shown below. The Charity Commission have provided a [guide to the fields in each file](http://data.charitycommission.gov.uk/data-definition.aspx). 
 
 **extract_charity.bcp**
 :	Gives the main details about each charity (one record per charity). Contains the contact information and address of each charity.
@@ -20,11 +24,11 @@ The Charity Commission data extract is in the form of a ZIP file which contains 
 **extract_class.bcp**
 :	Contains a record of each classification category associated with a charity. Categories cover three broad areas:
 
-	*	theme (eg health or education)
-	*	activity (eg providing services, providing health)
-	*	beneficiaries (eg older people, animals)
-	
-	Each charity can have multiple categories across these three areas, and there is no "primary" value available.
+*	theme (eg health or education)
+*	activity (eg providing services, providing health)
+*	beneficiaries (eg older people, animals)
+
+Each charity can have multiple categories across these three areas, and there is no "primary" value available.
 	
 **extract_trustee.bcp**
 :	Contains the name of the trustees associated with each charity
@@ -59,27 +63,39 @@ The Charity Commission data extract is in the form of a ZIP file which contains 
 Also included are a number of reference tables which list codes and values for some of the fields used in the data.
 
 **extract_class_ref.bcp**
-:	Lookup reference for the Charity Commission classification scheme, used in the `extract_class` table. These codes are included in appendix X.
+:	Lookup reference for the Charity Commission classification scheme, used in the `extract_class` table.
 
 **extract_remove_ref.bcp**
-:	Lookup reference for codes used to indicate the reasons why a charity has been removed from the register of charities, used in the `extract_registration` table. The codes are included in appendix X.
+:	Lookup reference for codes used to indicate the reasons why a charity has been removed from the register of charities, used in the `extract_registration` table.
 
 **extract_aoo_ref.bcp**
 :	Lookup reference for codes used in the `extract_charity_aoo` table.
-
-## Importing the data into a database
-
-Because the files form a relational database, the 
 
 #### Note: Subsidiary vs main charity
 
 The data in these tables relates to both subsidiary and main charities, although not every table has records for both. Subsidiary charities are attached to a main charity, and share their registration number (usually shown as `regno`). The main charity within each group has a `subno` of 0, whereas actual subsidiaries have `subno` greater than 0. In general, when analysing the data these subsidiaries are excluded.
 
+## Importing the data into a spreadsheet
+
+Because the files form a relational database, they aren't particularly suitable for analysis in a program that relies on single tables, such as Excel. If you want to look at the files in Excel, the best place to start is `extract_charity.csv`, which includes a record for every charity. 
+
+After opening the CSV in Excel, filter by `subno` = 0 to get a list of "main" charities (see note above). 
+
+To perform more sophisticated analysis it may be possible to open two files and use a `VLOOKUP` function to merge the two sources. But generally it is easier to import the data into a database and use it there.
+
+## Importing the data into a database
+
+The data is designed to be used in a database. If you use a SQL database, such as MySql, you can use the included <table-definitions.sql> file to create the needed files. You can then use something like PhpMyAdmin to import the data into the files. The SQL table definitions have been tested with MySQL but may be suitable for use with other SQL databases with some adjustment.
+
+You can also use the included MS Access template to set up an Access database, which you can then import the CSV files into. 
+
+When navigating the database, generally the unique identifier is the `regno` field (the charity's registration number). But make sure you also build relationships with the `subno` key which identifies subsidiary charities.
 
 ## Next steps
 
 Now you've got the data imported you might want to...
 
-- Add postcode data from the ONS to look for charities in a particular area
-- Take a look at the Scottish Charities data that's also been released
-- Import NCVO's classification scheme to look at which charities are in which subsector
+- Add [postcode data from the ONS](http://www.ons.gov.uk/ons/guide-method/geography/products/postcode-directories/-nspp-/index.html) to look for charities in a particular area.
+- Take a look at the [Scottish Charities data](http://www.oscr.org.uk/charities/search-scottish-charity-register/charity-register-download) that's also been released.
+- Import [NCVO's classification scheme](http://data.ncvo.org.uk/datastore/datasets/dataset-4-icnpo-classification-of-charities/) to look at which charities are in which subsector.
+- Look at the financial data available for larger charities in the `extract_partb` table.
