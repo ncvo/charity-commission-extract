@@ -8,20 +8,30 @@ The data can be [downloaded from the Charity Commission website](http://data.cha
 
 The data is made available by the Charity Commission under the terms of the [Open Government Licence](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).
 
+## Converting from .bcp to .csv
+
+First use the python scripts to extract the table files from the ZIP and transform into CSV files.
+
+1. Download the Charity register extract ZIP file using the link above.
+2. Open the command line and navigate to the folder where you want to store the files
+3. Run the command `python /path/to/script/import.py /path/to/download/zip/RegPlusExtract_February_2015.zip`
+
+The CSV files will be created in the directory you are in.
+
 ## What the file contains
 
-The Charity Commission data extract is in the form of a ZIP file which contains 17 files, in BCP format (an SQL backup format). The included files are shown below. The Charity Commission have provided a [guide to the fields in each file](http://data.charitycommission.gov.uk/data-definition.aspx). 
+The Charity Commission data extract is in the form of a ZIP file which contains 15 files, in BCP format (an SQL backup format). The included files are shown below. The Charity Commission have provided a [guide to the fields in each file](http://data.charitycommission.gov.uk/data-definition.aspx). 
 
-**extract_charity.bcp**
+**extract_charity**
 :	Gives the main details about each charity (one record per charity). Contains the contact information and address of each charity.
 
-**extract_registration.bcp**
+**extract_registration**
 :	Details of the date that charities were registered and removed, along with a code representing the reason for removal. Codes can be looked up from extract_remove_ref table. Note that some charities have more than one entry in this table, if (for example) they were removed in error and then reregistered.
 
-**extract_name.bcp**
+**extract_name**
 :	Contains a record of any name the charity has informed the Charity Commission that it works under. This includes: former names that are no longer used, alternative names, acronyms and abbreviations, and names of subsidiary or merged organisations.
 
-**extract_class.bcp**
+**extract_class**
 :	Contains a record of each classification category associated with a charity. Categories cover three broad areas:
 
 *	theme (eg health or education)
@@ -30,46 +40,49 @@ The Charity Commission data extract is in the form of a ZIP file which contains 
 
 Each charity can have multiple categories across these three areas, and there is no "primary" value available.
 	
-**extract_trustee.bcp**
+**extract_trustee**
 :	Contains the name of the trustees associated with each charity
 
-**extract_objects.bcp**
+**extract_objects**
 :	Contains the charitable objects of a charity. The objects are split into text strings, and there are multiple rows for each charity depending on how long their objects are. The objects then have to be concatenated to produce the full objects.
 
-**extract_keywords.bcp**
-:	Contains a list of keywords (with multiple rows per charity) based on the names and objects of the charities. It is not know how the keywords are selected for inclusion on this list.
-
-**extract_aob_keywords.bcp**
-:	Contains a list of keywords relating to the description of the area of benefit (found in the `extract_charity` table).
-
-**extract_charity_aoo.bcp**
+**extract_charity_aoo**
 :	Contains structured geographical data relating to the areas in which the charity operates. Most of the codes relate to common geographical aras, such as Local Authorities, or countries, but there are some additional codes such as "Throughout England and Wales" or "Throughout Greater London".
 
-**extract_ar_submit.bcp**
+**extract_ar_submit**
 :	Contains details of when the charity's annual returns were submitted.
 
-**extract_main_charity.bcp**
+**extract_main_charity**
 :	Contains one record for every main registered charity (but doesn't include removed or subsidiary charities). This contains additional details such as their website, email address and company number.
 
-**extract_acct_submit.bcp**
+**extract_acct_submit**
 :	Contains a record of when the charity's accounts were submitted.
 
-**extract_financial.bcp**
+**extract_financial**
 :	Contains a row for each year for each charity, showing what its income and expenditure was. Tends to only include the last five years or so.
 
-**extract_partb.bcp**
+**extract_partb**
 :	Contains a row for each year for each charity, with more detailed financial information. Charities only have to fill in this information if their income is greater than &pound;500,000 in that year.
 
 Also included are a number of reference tables which list codes and values for some of the fields used in the data.
 
-**extract_class_ref.bcp**
+**extract_class_ref**
 :	Lookup reference for the Charity Commission classification scheme, used in the `extract_class` table.
 
-**extract_remove_ref.bcp**
+**extract_remove_ref**
 :	Lookup reference for codes used to indicate the reasons why a charity has been removed from the register of charities, used in the `extract_registration` table.
 
-**extract_aoo_ref.bcp**
+**extract_aoo_ref**
 :	Lookup reference for codes used in the `extract_charity_aoo` table.
+
+Two tables were included in earlier versions of the extract but appear to have been dropped.
+
+**extract_keywords**
+:	**NOT INCLUDED IN EXTRACT** Contains a list of keywords (with multiple rows per charity) based on the names and objects of the charities. It is not know how the keywords are selected for inclusion on this list.
+
+**extract_aob_keywords**
+:	**NOT INCLUDED IN EXTRACT** Contains a list of keywords relating to the description of the area of benefit (found in the `extract_charity` table).
+
 
 #### Note: Subsidiary vs main charity
 
