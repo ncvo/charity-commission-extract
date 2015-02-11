@@ -77,11 +77,11 @@ Also included are a number of reference tables which list codes and values for s
 
 Two tables were included in earlier versions of the extract but appear to have been dropped.
 
-**extract_keywords**
-:	**NOT INCLUDED IN EXTRACT** Contains a list of keywords (with multiple rows per charity) based on the names and objects of the charities. It is not know how the keywords are selected for inclusion on this list.
+~~**extract_keywords**
+:	Contains a list of keywords (with multiple rows per charity) based on the names and objects of the charities. It is not know how the keywords are selected for inclusion on this list.~~
 
-**extract_aob_keywords**
-:	**NOT INCLUDED IN EXTRACT** Contains a list of keywords relating to the description of the area of benefit (found in the `extract_charity` table).
+~~**extract_aob_keywords**
+:	Contains a list of keywords relating to the description of the area of benefit (found in the `extract_charity` table).~~
 
 
 #### Note: Subsidiary vs main charity
