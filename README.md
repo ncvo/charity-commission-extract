@@ -1,6 +1,14 @@
 # charity-commission-extract
 Python utilities for handling the import of data from the Charity Commission data extract
 
+## Get the data
+
+The data can be accessed from <http://data.charitycommission.gov.uk/default.aspx>
+
+## Beginner's Guide
+
+A [beginner's guide](beginners-guide.md) to using the Charity Commission data extract.
+
 ## Utilities
 
 ### import.py
