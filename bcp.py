@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import sys
 
-def convert(bcpdata, csvfilename="", lineterminator='*@@*', delimiter='@**@', quote='"', newdelimiter=';'):
+def convert(bcpdata, csvfilename="", lineterminator='*@@*', delimiter='@**@', quote='"', newdelimiter=','):
     bcpdata = bcpdata.replace(quote, '\\' + quote)
     bcpdata = bcpdata.replace(delimiter, quote + newdelimiter + quote)
     bcpdata = bcpdata.replace(lineterminator, quote + '\n' + quote)
