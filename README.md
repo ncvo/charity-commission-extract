@@ -14,7 +14,8 @@ A [beginner's guide](beginners-guide.md) to using the Charity Commission data ex
 ### import.py
 
 This script accepts a ZIP file containing the Charity Commission data extract and converts 
-it into CSV files. It uses the bcp.py script to convert the .bcp files into .csv.
+it into CSV files. It uses the bcp.py script to convert the .bcp files into .csv. It also 
+adds column headings to the beginning of the files.
 
 #### Usage
 
@@ -42,3 +43,7 @@ Use the function `convert(bcpdata, csvfilename="", lineterminator='*@@*', delimi
 - `delimiter` the column delimiter used in the BCP file (default is `@**@`)
 - `quote` the character used to quote strings (default is `"`)
 - `newdelimiter` character used to delimit the CSV file (default is `,`)
+
+Note that the function puts every field in the CSV file in quotes, regardless of the type of field
+(so numbers, dates, etc are all quoted). This will need to be taken into account when importing data
+from these CSV files.
