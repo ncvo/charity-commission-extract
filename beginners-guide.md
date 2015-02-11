@@ -2,7 +2,7 @@
 
 ## Downloading the data
 
-The data can be [downloaded from the Charity Commission website](http://data.charitycommission.gov.uk/default.aspx). The file is quite large (around 100Mb) so make take some time, particularly on slower connections).
+The data can be [downloaded from the Charity Commission website](http://data.charitycommission.gov.uk/default.aspx). The file is quite large (around 100Mb) so may take some time, particularly on slower connections).
 
 #### Data licence
 
@@ -26,7 +26,7 @@ The Charity Commission data extract is in the form of a ZIP file which contains 
 :	Gives the main details about each charity (one record per charity). Contains the contact information and address of each charity.
 
 **extract_registration**
-:	Details of the date that charities were registered and removed, along with a code representing the reason for removal. Codes can be looked up from extract_remove_ref table. Note that some charities have more than one entry in this table, if (for example) they were removed in error and then reregistered.
+:	Details of the date that charities were registered and removed, along with a code representing the reason for removal. Codes can be looked up from `extract_remove_ref` table. Note that some charities have more than one entry in this table, if (for example) they were removed in error and then reregistered.
 
 **extract_name**
 :	Contains a record of any name the charity has informed the Charity Commission that it works under. This includes: former names that are no longer used, alternative names, acronyms and abbreviations, and names of subsidiary or merged organisations.
@@ -112,3 +112,4 @@ Now you've got the data imported you might want to...
 - Take a look at the [Scottish Charities data](http://www.oscr.org.uk/charities/search-scottish-charity-register/charity-register-download) that's also been released.
 - Import [NCVO's classification scheme](http://data.ncvo.org.uk/datastore/datasets/dataset-4-icnpo-classification-of-charities/) to look at which charities are in which subsector.
 - Look at the financial data available for larger charities in the `extract_partb` table.
+- Explore the SIR data which is also available in the Charity Commission extract (soon to be discontinued)
