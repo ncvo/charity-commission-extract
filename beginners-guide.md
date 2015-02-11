@@ -98,7 +98,7 @@ To perform more sophisticated analysis it may be possible to open two files and 
 
 ## Importing the data into a database
 
-The data is designed to be used in a database. If you use a SQL database, such as MySql, you can use the included `[table-definitions.sql](table-definitions.sql)` file to create the needed files. You can then use something like PhpMyAdmin to import the data into the files. The SQL table definitions have been tested with MySQL but may be suitable for use with other SQL databases with some adjustment.
+The data is designed to be used in a database. If you use a SQL database, such as MySql, you can use the included `table-definitions.sql` file to create the needed files. You can then use something like PhpMyAdmin to import the data into the files. The SQL table definitions have been tested with MySQL but may be suitable for use with other SQL databases with some adjustment.
 
 You can also use the included MS Access template to set up an Access database, which you can then import the CSV files into. 
 
