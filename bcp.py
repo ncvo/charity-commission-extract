@@ -1,13 +1,17 @@
 #!/usr/bin/env python
 import sys
+import csv
 
-def convert(bcpdata, csvfilename="", lineterminator='*@@*', delimiter='@**@', quote='"', newdelimiter=','):
+def convert(bcpdata, csvfilename="", lineterminator='*@@*', delimiter='@**@', quote='"', newdelimiter=',', col_headers=None):
     bcpdata = bcpdata.replace(quote, '\\' + quote)
     bcpdata = bcpdata.replace(delimiter, quote + newdelimiter + quote)
     bcpdata = bcpdata.replace(lineterminator, quote + '\n' + quote)
     if csvfilename=="":
         csvfilename = 'converted.csv'
     with open(csvfilename, 'wb') as csvfile:
+        if(col_headers):
+            writer = csv.writer(csvfile)
+            writer.writerow(col_headers)
         csvfile.write('"')
         csvfile.write(bcpdata)
         csvfile.write('"')
