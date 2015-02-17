@@ -10,7 +10,7 @@ The data is made available by the Charity Commission under the terms of the [Ope
 
 ## Converting from .bcp to .csv
 
-First use the python scripts to extract the table files from the ZIP and transform into CSV files.
+First use [these python scripts](https://github.com/ncvo/charity-commission-extract/) to extract the table files from the ZIP and transform into CSV files. ([Never used python before? Start here](https://www.python.org/about/gettingstarted/))
 
 1. Download the Charity register extract ZIP file using the link above.
 2. Open the command line and navigate to the folder where you want to store the files
