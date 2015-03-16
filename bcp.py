@@ -2,10 +2,11 @@
 import sys
 import csv
 
-def convert(bcpdata, csvfilename="", lineterminator='*@@*', delimiter='@**@', quote='"', newdelimiter=',', col_headers=None):
-    bcpdata = bcpdata.replace(quote, '\\' + quote)
+def convert(bcpdata, csvfilename="", lineterminator='*@@*', delimiter='@**@', quote='"', newdelimiter=',', col_headers=None, escapechar='\\', newline='\n'):
+    bcpdata = bcpdata.replace(escapechar, escapechar + escapechar)
+    bcpdata = bcpdata.replace(quote, escapechar + quote)
     bcpdata = bcpdata.replace(delimiter, quote + newdelimiter + quote)
-    bcpdata = bcpdata.replace(lineterminator, quote + '\n' + quote)
+    bcpdata = bcpdata.replace(lineterminator, quote + newline + quote)
     if csvfilename=="":
         csvfilename = 'converted.csv'
     with open(csvfilename, 'wb') as csvfile:
