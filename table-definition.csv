@@ -76,7 +76,7 @@
 "aootype","char(1)","A (wide), B (LA), C (GLA/met county), D (country), E (continent)"
 "aookey","integer","Values if aootype=A are: 1 England/Wales; 2 England; 3 Wales; 4 London."
 "aooname","char(50)","name of an area of operation"
-"aoosort","char(50)","for searches, "City of" removed from aooname"
+"aoosort","char(50)","for searches, 'City of' removed from aooname"
 "welsh","char(1)","Flag: Y or blank"
 "master","integer","may be blank. If aootype=D then holds continent; if aootype=B then holds GLA/met county"
 "","",""
