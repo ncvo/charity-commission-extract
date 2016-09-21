@@ -9,6 +9,8 @@ The data can be accessed from <http://data.charitycommission.gov.uk/default.aspx
 
 A [beginner's guide](beginners-guide.md) to using the Charity Commission data extract.
 
+Marc Lawson at NCVO has also written [a guide to getting the data into a database](https://data.ncvo.org.uk/a/almanac16/how-to-create-a-database-for-charity-commission-data/).
+
 ## Utilities
 
 ### import.py
