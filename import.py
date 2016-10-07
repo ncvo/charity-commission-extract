@@ -2,6 +2,7 @@
 import bcp
 import zipfile
 import sys
+from __future__ import print_function
 
 cc_files = {
 	"extract_acct_submit": [
@@ -156,16 +157,16 @@ cc_files = {
 
 def import_zip(zip_file):
     zf = zipfile.ZipFile(zip_file, 'r')
-    print 'Opened zip file: %s' % zip_file
+    print('Opened zip file: %s' % zip_file)
     for filename in cc_files:
         try:
             bcp_filename = filename + '.bcp'
             csv_filename = filename + '.csv'
             bcpdata = zf.read(bcp_filename)
             bcp.convert(bcpdata, csvfilename=csv_filename, col_headers=cc_files[filename])
-            print 'Converted: %s' % bcp_filename
+            print('Converted: %s' % bcp_filename)
         except KeyError:
-            print 'ERROR: Did not find %s in zip file' % bcp_filename
+            print('ERROR: Did not find %s in zip file' % bcp_filename)
 
 def main():
     zip_file = sys.argv[1]
