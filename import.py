@@ -1,8 +1,8 @@
 #!/usr/bin/env python
+from __future__ import print_function
 import bcp
 import zipfile
 import sys
-from __future__ import print_function
 
 cc_files = {
     "extract_acct_submit": [
@@ -163,7 +163,9 @@ def import_zip(zip_file):
             bcp_filename = filename + '.bcp'
             csv_filename = filename + '.csv'
             bcpdata = zf.read(bcp_filename)
-            bcp.convert(bcpdata, csvfilename=csv_filename, col_headers=cc_files[filename])
+            bcpdata = bcpdata.decode('utf-8', errors="replace")
+            bcpdata = bcp.convert(bcpdata)
+            bcp.to_file(bcpdata, csvfilename=csv_filename, col_headers=cc_files[filename])
             print('Converted: %s' % bcp_filename)
         except KeyError:
             print('ERROR: Did not find %s in zip file' % bcp_filename)
