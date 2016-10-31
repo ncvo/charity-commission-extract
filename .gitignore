@@ -23,6 +23,7 @@ $RECYCLE.BIN/
 # CSV and ZIP files
 *.csv
 *.zip
+*.bcp
 
 # other files
 *.pyc
