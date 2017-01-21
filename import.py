@@ -18,8 +18,7 @@ cc_files = {
       "aooname",
       "aoosort",
       "welsh",
-      "master",
-      "code"
+      "master"
     ], 
     "extract_ar_submit": [
       "regno",
