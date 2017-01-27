@@ -11,7 +11,7 @@ cc_files = {
       "submit_date",
       "arno",
       "fyend"
-    ], 
+    ],
     "extract_aoo_ref": [
       "aootype",
       "aookey",
@@ -19,12 +19,12 @@ cc_files = {
       "aoosort",
       "welsh",
       "master"
-    ], 
+    ],
     "extract_ar_submit": [
       "regno",
       "arno",
       "submit_date"
-    ], 
+    ],
     "extract_charity": [
       "regno",
       "subno",
@@ -44,29 +44,29 @@ cc_files = {
       "postcode",
       "phone",
       "fax",
-    ], 
+    ],
     "extract_charity_aoo": [
       "regno",
       "aootype",
       "aookey",
       "welsh",
       "master"
-    ], 
+    ],
     "extract_class": [
       "regno",
       "class"
-    ], 
+    ],
     "extract_class_ref": [
       "classno",
       "classtext",
-    ], 
+    ],
     "extract_financial": [
       "regno",
       "fystart",
       "fyend",
       "income",
       "expend"
-    ], 
+    ],
     "extract_main_charity": [
       "regno",
       "coyno",
@@ -78,19 +78,19 @@ cc_files = {
       "grouptype",
       "email",
       "web"
-    ], 
+    ],
     "extract_name": [
       "regno",
       "subno",
       "nameno",
       "name"
-    ], 
+    ],
     "extract_objects": [
       "regno",
       "subno",
       "seqno",
       "object"
-    ], 
+    ],
     "extract_partb": [
       "regno",
       "artype",
@@ -137,31 +137,31 @@ cc_files = {
       "volunteers",
       "cons_acc",
       "charity_acc"
-    ], 
+    ],
     "extract_registration": [
       "regno",
       "subno",
       "regdate",
       "remdate",
       "remcode"
-    ], 
+    ],
     "extract_remove_ref": [
       "code",
       "text"
-    ], 
+    ],
     "extract_trustee": [
       "regno",
       "trustee"
     ]
 }
-    
+
 def to_file(bcpdata, csvfilename="", col_headers=None):
     if csvfilename=="":
         csvfilename = 'converted.csv'
-        
+
     # have to check system version annoyingly
     if sys.version_info >= (3,0):
-    
+
         # python3 csv writer needs strings
         with open(csvfilename, 'w', encoding='utf-8') as csvfile:
             if(col_headers):
@@ -170,9 +170,9 @@ def to_file(bcpdata, csvfilename="", col_headers=None):
                 writer = csv.writer(csvfile)
                 writer.writerow(col_headers)
             csvfile.write(bcpdata)
-        
+
     else:
-    
+
         # python2 csv writer needs bytes
         with open(csvfilename, 'wb') as csvfile:
             if(col_headers):
@@ -181,7 +181,7 @@ def to_file(bcpdata, csvfilename="", col_headers=None):
                 writer = csv.writer(csvfile)
                 writer.writerow(col_headers)
             csvfile.write(bcpdata.encode('utf-8'))
-        
+
     return csvfilename
 
 def import_zip_stream(zip_file):
@@ -192,28 +192,28 @@ def import_zip_stream(zip_file):
             bcp_filename = filename + '.bcp'
             csv_filename = filename + '.csv'
             col_headers=cc_files[filename]
-        
+
             # have to check system version annoyingly
             # for python 3 >
             if sys.version_info >= (3,0):
-                
+
                 with zf.open(bcp_filename, 'r') as bcpfile:
                     with open(csv_filename, 'w', newline='') as csvfile:
                         writer = csv.writer(csvfile)
                         writer.writerow(col_headers)
                         for bcpfields in bcp.stream(bcpfile):
                             writer.writerow(bcpfields)
-            
+
             # for python 2
             else:
-                
+
                 with zf.open(bcp_filename, 'r') as bcpfile:
                     with open(csv_filename, 'wb') as csvfile:
                         writer = csv.writer(csvfile)
                         writer.writerow(col_headers)
                         for bcpfields in bcp.stream(bcpfile):
                             writer.writerow(bcpfields)
-                            
+
             print('Converted: %s' % bcp_filename)
         except KeyError:
             print('ERROR: Did not find %s in zip file' % bcp_filename)
@@ -223,8 +223,14 @@ def import_zip(zip_file):
     print('Opened zip file: %s' % zip_file)
     for filename in cc_files:
         try:
-            bcp_filename = filename + '.bcp'
+            check_filename = filename + '.bcp'
             csv_filename = filename + '.csv'
+
+            # check whether there is a file in the
+            for i in zf.namelist():
+                if i[-len(check_filename):]==check_filename:
+                    bcp_filename = i
+
             bcpdata = zf.read(bcp_filename)
             bcpdata = bcpdata.decode('utf-8', errors="replace")
             bcpdata = bcp.convert(bcpdata)
@@ -232,7 +238,7 @@ def import_zip(zip_file):
             print('Converted: %s' % bcp_filename)
         except KeyError:
             print('ERROR: Did not find %s in zip file' % bcp_filename)
-            
+
 def main():
     zip_file = sys.argv[1]
     import_zip(zip_file)
