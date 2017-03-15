@@ -1,9 +1,9 @@
 CREATE TABLE IF NOT EXISTS `extract_acct_submit` (
   `regno` varchar(14) CHARACTER SET latin1 NOT NULL DEFAULT '0',
-  `submit_date` datetime DEFAULT NULL,
+  `submit_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `arno` varchar(4) CHARACTER SET latin1 NOT NULL DEFAULT '',
   `fyend` char(4) CHARACTER SET latin1 DEFAULT NULL,
-  PRIMARY KEY (`regno`,`arno`)
+  PRIMARY KEY (`regno`,`arno`,`submit_date`)
 );
 
 CREATE TABLE IF NOT EXISTS `extract_aoo_ref` (
@@ -20,8 +20,8 @@ CREATE TABLE IF NOT EXISTS `extract_aoo_ref` (
 CREATE TABLE IF NOT EXISTS `extract_ar_submit` (
   `regno` varchar(14) CHARACTER SET latin1 NOT NULL DEFAULT '0',
   `arno` varchar(4) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `submit_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`regno`,`arno`)
+  `submit_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`regno`,`arno`,`submit_date`)
 );
 
 CREATE TABLE IF NOT EXISTS `extract_charity` (
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `extract_class_ref` (
 CREATE TABLE IF NOT EXISTS `extract_financial` (
   `regno` varchar(14) NOT NULL DEFAULT '0',
   `fystart` datetime DEFAULT NULL,
-  `fyend` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `fyend` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `income` int(11) DEFAULT NULL,
   `expend` int(11) DEFAULT NULL,
   PRIMARY KEY (`regno`,`fyend`)
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `extract_partb` (
   `regno` varchar(14) CHARACTER SET latin1 NOT NULL DEFAULT '0',
   `artype` char(4) CHARACTER SET latin1 NOT NULL DEFAULT '',
   `fystart` datetime DEFAULT NULL,
-  `fyend` datetime DEFAULT NULL,
+  `fyend` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `inc_leg` bigint(20) DEFAULT NULL,
   `inc_end` bigint(20) DEFAULT NULL,
   `inc_vol` bigint(20) DEFAULT NULL,
@@ -152,13 +152,13 @@ CREATE TABLE IF NOT EXISTS `extract_partb` (
   `volunteers` int(11) DEFAULT NULL,
   `cons_acc` char(1) CHARACTER SET latin1 DEFAULT NULL,
   `charity_acc` char(1) CHARACTER SET latin1 DEFAULT NULL,
-  PRIMARY KEY (`regno`,`artype`)
+  PRIMARY KEY (`regno`,`fyend`)
 );
 
 CREATE TABLE IF NOT EXISTS `extract_registration` (
   `regno` varchar(14) CHARACTER SET latin1 NOT NULL DEFAULT '0',
   `subno` int(11) NOT NULL DEFAULT '0',
-  `regdate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `regdate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `remdate` datetime DEFAULT NULL,
   `remcode` varchar(3) CHARACTER SET latin1 DEFAULT NULL,
   PRIMARY KEY (`regno`,`subno`,`regdate`)
