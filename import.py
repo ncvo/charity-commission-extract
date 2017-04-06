@@ -167,7 +167,7 @@ def to_file(bcpdata, csvfilename="", col_headers=None):
             if(col_headers):
                 for c in col_headers:
                     c = c
-                writer = csv.writer(csvfile)
+                writer = csv.writer(csvfile, lineterminator='\n')
                 writer.writerow(col_headers)
             csvfile.write(bcpdata)
 
