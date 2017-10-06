@@ -240,8 +240,12 @@ def import_zip(zip_file):
             print('ERROR: Did not find %s in zip file' % bcp_filename)
 
 def main():
-    zip_file = sys.argv[1]
-    import_zip(zip_file)
+	if len(sys.argv) == 2:
+		zip_file = sys.argv[1]
+		import_zip(zip_file)
+	else:
+		print("ERROR: No Charity data ZIP file provided.")
+		print("Usage: " + sys.argv[0] + " CHARITY_DATA.zip")
 
 if __name__ == '__main__':
     main()
