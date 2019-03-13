@@ -30,3 +30,6 @@ $RECYCLE.BIN/
 *.tmp
 .cache/
 __pycache__/
+
+# Test data zips
+RegPlus*.zip
