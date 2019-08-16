@@ -45,8 +45,8 @@ As an example of how to store and execute the files, you could do the following:
 
 - Create a folder called ‘import_charities’ on your ‘C’ drive and inside this folder create two additional folders called ‘script’ and ‘data’.  You should then place the import script in ‘script’ and the zip file in the relevant month folder (‘cc_201701’ for January 2017) inside the ‘data’ folder.
 - Open the command line interface in the ‘script’ folder, type: `python import.py "C:\import_charities\data\cc_201701\RegPlusExtract_January_2017.zip"`
-- The command line should look like this
-[image]
+- The command line should look like this: 
+![](charities_import_2.png)
 - Press the enter key on the keyboard
 
 If you’re unsure about getting the correct file path then you can hold ‘Shift’ and right-click on the file to bring up the menu, then choose ‘Copy as path’ to copy to your clipboard and paste this into the command prompt next to ‘python import.py’ (to paste this, you’ll have to right click in the command prompt to bring up the copy and paste menu).
